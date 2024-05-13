@@ -48,6 +48,12 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'corsheaders.middleware.CorsMiddleware',  # 添加这行
+]
+
+CORS_ALLOWED_ORIGINS = [
+    'http://localhost:5173',  # 你的前端应用的地址
+    'http://example.com',     # 其他允许的域名
 ]
 
 ROOT_URLCONF = 'Django.urls'
