@@ -25,7 +25,8 @@ SECRET_KEY = 'django-insecure-&z)^=m16oplz^0sia*csrma%n0h_vrsmygtw5^segb6vn-e-5o
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['139.196.213.64']
+ALLOWED_HOSTS = ['139.196.213.64', '127.0.0.1']
+
 
 
 # Application definition
@@ -44,7 +45,7 @@ MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
-    'django.middleware.csrf.CsrfViewMiddleware',
+    # 'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
@@ -86,7 +87,7 @@ DATABASES = {
         'NAME': 'mysql', # 数据库名称
         'USER': 'root',       # 数据库用户名
         'PASSWORD': 'asdzxc123',  # 数据库密码
-        'HOST': 'localhost',  # 数据库主机
+        'HOST': '139.196.213.64',  # 数据库主机
         'PORT': '3306',       # 数据库端口
     }
 }
@@ -132,3 +133,7 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+if DEBUG:
+    CSRF_COOKIE_SECURE = False
+    CSRF_COOKIE_HTTPONLY = False

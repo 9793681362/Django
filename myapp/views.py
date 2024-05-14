@@ -1,5 +1,10 @@
 from django.http import JsonResponse
 from .models import MyModel
+from .models import User
+import json
+
+
+
 
 def my_view(request):
     data = list(MyModel.objects.all().values())
@@ -30,6 +35,44 @@ def get_nav_value(request):
         {'id': 11, 'nav': '', 'content': ''}
     ]
     return JsonResponse(nav_value, safe=False)
+
+
+def login_view(request):
+    if request.method == 'POST':
+        # 从 POST 请求中获取用户名和密码
+        username = request.POST.get('username')
+        password = request.POST.get('password')
+
+        # 检查用户名和密码是否为 admin 和 111111
+        print('username',username)
+        print('password',password)
+        if username == 'admin' and password == '111111':
+            # 登录成功
+            return JsonResponse({'message': 'Login successful'}, status=200)
+        else:
+            # 登录失败，用户名或密码错误
+            return JsonResponse({'error': 'Invalid username or password'}, status=400)
+    else:
+        # 不支持除 POST 以外的其他请求方法
+        return JsonResponse({'error': 'Only POST requests are allowed'}, status=405)
+
+
+
+def create_user(request):
+    if request.method == 'POST':
+        data = json.loads(request.body)
+        username = data.get('username')
+        password = data.get('password')
+        email = data.get('email')
+
+        if username and password and email:
+            user = User.objects.create(username=username, password=password, email=email)
+            return JsonResponse({'message': 'User created successfully', 'id': user.id}, status=201)
+        else:
+            return JsonResponse({'error': 'Missing username, password, or email'}, status=400)
+    else:
+        return JsonResponse({'error': 'Only POST requests are allowed'}, status=405)
+
 
 def home(request):
     return JsonResponse({"message": "Welcome to the API!"})
