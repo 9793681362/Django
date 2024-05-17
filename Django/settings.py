@@ -84,13 +84,15 @@ WSGI_APPLICATION = 'Django.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'mysql', # 数据库名称
+        'NAME': 'rick_open_t', # 数据库名称
         'USER': 'root',       # 数据库用户名
         'PASSWORD': 'asdzxc123',  # 数据库密码
         'HOST': '139.196.213.64',  # 数据库主机
         'PORT': '3306',       # 数据库端口
     }
 }
+
+
 
 
 # Password validation
